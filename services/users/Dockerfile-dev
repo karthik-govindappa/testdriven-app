@@ -1,5 +1,8 @@
 FROM python:3.5.2
 
+# install evironment dependencies
+RUN apt-get update -yqq && apt-get install -yqq --no-install-recommends netcat && apt-get -q clean
+
 # set working directory
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -14,4 +17,4 @@ RUN pip install -r requirements.txt
 COPY . /usr/src/app
 
 # run server
-CMD python manage.py run -h 0.0.0.0
+CMD ["./entrypoint.sh"]
